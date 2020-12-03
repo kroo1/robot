@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<style id="mix_css">
+			.s_skiemel {
+			    background-color: darkorange;
+			}
+			.s_talalat {
+				padding: 5px;
+			}
+		</style>
+		<script type="text/javascript" >
+			
+			var INDEX = [
+				["Zala","8900"," Zalaegerszeg","Kosztolányi Dezső  utca 10"],
+				["Veszprém","8200","Veszprém","Megyeház tér 1"],
+				["Vas megye","9700","Szombathely","Berzsenyi Dániel tér 1"],
+				["Tolna megye","7100","Szekszárd","Augusz I. utca 7"],
+				["Szabolcs-Szatmár-Bereg megye","4400"," Nyíregyháza ","Hősök tere 5"],
+				["Somogy","7400","Kaposvár","Nagy Imre tér 1"],
+				["Budapest","1052","Budapest","Városház utca 7"],
+				["Nógrád","3100","Salgótarján","Zemlinszky Rezső út 9"]
+			];
+			
+			var ered_div = null;
+			
+			function index_load() {
+				ered_div = document.getElementById("eredm");
+				res_div = document.getElementById("sresult");
+				
+			}
+			var reg = null;
+			function int_search(pattern) {
+				if(!pattern) {
+					pattern = "";
+				}
+				pattern = pattern.replace(/(^\s*|\s*$)/g, '');
+				var talalatok = [];
+				if(pattern.length > 0) {
+					var patterns = pattern.split(' ');
+					if(patterns && patterns.length > 0) {
+						reg = new RegExp("("+patterns.join('|')+")", "ig");
+					}else {
+						reg = null;
+					}
+					var count = INDEX.length;
+					if(reg) {
+						for(var i = 0; i < count; i++) {
+							var talal = INDEX[i].join(' ').match(reg);
+							if(talal && talal.length > 0) {
+								talalatok.push(i);
+							}
+						}
+					}
+				}
+				update_result(talalatok);
+			}
+			
+			function update_result(talalatok) {
+				res_div.innerHTML= "";
+				var count = talalatok.length;
+				ered_div.innerHTML = "Eredmény "+count+" db";
+				for(var i = 0; i < count; i++) {
+					var item = INDEX[talalatok[i]];
+					if (item) {
+						var div = document.createElement("div");
+						div.setAttribute("class", "s_talalat");
+						var sitem = item[1] + ", " + item[2] + "</br>" + item[3] + "</br>" + item[0];
+						sitem = sitem.replaceAll(reg, '<span class="s_skiemel">$1</span>');
+						div.innerHTML = sitem;
+						res_div.appendChild(div);
+					}
+				}
+			}
+			
+		</script>
+		<title></title>
+	</head>
+	<body onload="index_load()">
+		<div>
+			Keres
+		</div>
+		<p>
+			<input type="text" id="pattern" onkeyup="int_search(this.value)"/>
+		</p>
+		<div id="eredm">
+			Eredmény
+		</div>
+		<div id="sresult"></div>
+	</body>
+</html>

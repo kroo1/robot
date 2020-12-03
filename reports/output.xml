@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot rpa="false" generated="20201203 22:04:48.361" generator="Robot 3.2.1 (Python 2.7.12 on linux2)">
+<suite source="/suites" id="s1" name="Suites">
+<suite source="/suites/webdemo.robot" id="s1-s1" name="Webdemo">
+<test id="s1-s1-t1" name="WebDemo test">
+<kw name="Open Excel" library="ExcelLibrary">
+<doc>Opens the Excel file from the path provided in the file name parameter.
+If the boolean useTempDir is set to true, depending on the operating system of the computer running the test the file will be opened in the Temp directory if the operating system is Windows or tmp directory if it is not.</doc>
+<arguments>
+<arg>/suites/webdemo.xls</arg>
+</arguments>
+<status status="PASS" endtime="20201203 22:04:48.541" starttime="20201203 22:04:48.529"></status>
+</kw>
+<kw name="Get Sheet Values" library="ExcelLibrary">
+<doc>Returns the values from the sheet name specified.</doc>
+<arguments>
+<arg>data</arg>
+<arg>False</arg>
+</arguments>
+<assign>
+<var>${Sheet}</var>
+</assign>
+<msg timestamp="20201203 22:04:48.550" level="INFO">${Sheet} = [('A1', u'pattern'), ('A2', u'za'), ('A3', u'b'), ('A4', u'utca'), ('B1', u'db'), ('B2', u'2 db'), ('B3', u'3 db'), ('B4', u'3 db')]</msg>
+<status status="PASS" endtime="20201203 22:04:48.550" starttime="20201203 22:04:48.542"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${Sheet}</arg>
+</arguments>
+<msg timestamp="20201203 22:04:48.551" level="INFO">[('A1', u'pattern'), ('A2', u'za'), ('A3', u'b'), ('A4', u'utca'), ('B1', u'db'), ('B2', u'2 db'), ('B3', u'3 db'), ('B4', u'3 db')]</msg>
+<status status="PASS" endtime="20201203 22:04:48.551" starttime="20201203 22:04:48.551"></status>
+</kw>
+<kw name="Get Row Count" library="ExcelLibrary">
+<doc>Returns the specific number of rows of the sheet name specified.</doc>
+<arguments>
+<arg>data</arg>
+</arguments>
+<assign>
+<var>${rowcount}</var>
+</assign>
+<msg timestamp="20201203 22:04:48.551" level="INFO">${rowcount} = 4</msg>
+<status status="PASS" endtime="20201203 22:04:48.552" starttime="20201203 22:04:48.551"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${rowcount}</arg>
+</arguments>
+<msg timestamp="20201203 22:04:48.552" level="INFO">4</msg>
+<status status="PASS" endtime="20201203 22:04:48.552" starttime="20201203 22:04:48.552"></status>
+</kw>
+<kw name="Get Row Values" library="ExcelLibrary">
+<doc>Returns the specific row values of the sheet name specified.</doc>
+<arguments>
+<arg>data</arg>
+<arg>0</arg>
+<arg>False</arg>
+</arguments>
+<assign>
+<var>${keywords}</var>
+</assign>
+<msg timestamp="20201203 22:04:48.552" level="INFO">${keywords} = [('A1', u'pattern'), ('B1', u'db')]</msg>
+<status status="PASS" endtime="20201203 22:04:48.552" starttime="20201203 22:04:48.552"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${keywords}</arg>
+</arguments>
+<msg timestamp="20201203 22:04:48.553" level="INFO">[('A1', u'pattern'), ('B1', u'db')]</msg>
+<status status="PASS" endtime="20201203 22:04:48.553" starttime="20201203 22:04:48.553"></status>
+</kw>
+<kw name="Start Virtual Display" library="XvfbRobot">
+<doc>Starts virtual display which will be
+ destroyed after test execution will be end</doc>
+<arguments>
+<arg>1440</arg>
+<arg>900</arg>
+</arguments>
+<msg timestamp="20201203 22:04:48.553" level="INFO">Using virtual display: '1440x900x24'</msg>
+<status status="PASS" endtime="20201203 22:04:49.064" starttime="20201203 22:04:48.553"></status>
+</kw>
+<kw name="Open Chrome Browser">
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys, selenium.webdriver</arg>
+</arguments>
+<assign>
+<var>${options}</var>
+</assign>
+<msg timestamp="20201203 22:04:49.071" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x7fb4f56e0e10&gt;</msg>
+<status status="PASS" endtime="20201203 22:04:49.071" starttime="20201203 22:04:49.069"></status>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<arguments>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--no-sandbox</arg>
+</arguments>
+<status status="PASS" endtime="20201203 22:04:49.072" starttime="20201203 22:04:49.071"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>download.default_directory=${TMP_PATH}</arg>
+</arguments>
+<assign>
+<var>${prefs}</var>
+</assign>
+<msg timestamp="20201203 22:04:49.075" level="INFO">${prefs} = {u'download.default_directory': u'/tmp'}</msg>
+<status status="PASS" endtime="20201203 22:04:49.075" starttime="20201203 22:04:49.073"></status>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<arguments>
+<arg>${options}</arg>
+<arg>add_experimental_option</arg>
+<arg>prefs</arg>
+<arg>${prefs}</arg>
+</arguments>
+<status status="PASS" endtime="20201203 22:04:49.076" starttime="20201203 22:04:49.075"></status>
+</kw>
+<kw name="Create Webdriver" library="Selenium2Library">
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<arguments>
+<arg>Chrome</arg>
+<arg>chrome_options=${options}</arg>
+</arguments>
+<msg timestamp="20201203 22:04:49.077" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<status status="PASS" endtime="20201203 22:04:50.957" starttime="20201203 22:04:49.076"></status>
+</kw>
+<status status="PASS" endtime="20201203 22:04:50.957" starttime="20201203 22:04:49.066"></status>
+</kw>
+<kw name="Go To" library="Selenium2Library">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>file:///suites/keres.html</arg>
+</arguments>
+<msg timestamp="20201203 22:04:50.958" level="INFO">Opening url 'file:///suites/keres.html'</msg>
+<status status="PASS" endtime="20201203 22:04:51.015" starttime="20201203 22:04:50.957"></status>
+</kw>
+<kw type="for" name="${row} IN RANGE [ 1 | ${rowcount} ]">
+<kw type="foritem" name="${row} = 1">
+<kw name="Get Row Values" library="ExcelLibrary">
+<doc>Returns the specific row values of the sheet name specified.</doc>
+<arguments>
+<arg>data</arg>
+<arg>${row}</arg>
+<arg>True</arg>
+</arguments>
+<assign>
+<var>${testdata}</var>
+</assign>
+<msg timestamp="20201203 22:04:51.016" level="INFO">${testdata} = [('A2', u'za'), ('B2', u'2 db')]</msg>
+<status status="PASS" endtime="20201203 22:04:51.016" starttime="20201203 22:04:51.015"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${testdata}</arg>
+</arguments>
+<msg timestamp="20201203 22:04:51.017" level="INFO">[('A2', u'za'), ('B2', u'2 db')]</msg>
+<status status="PASS" endtime="20201203 22:04:51.017" starttime="20201203 22:04:51.016"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${testdata}[0][1]</arg>
+</arguments>
+<msg timestamp="20201203 22:04:51.017" level="INFO">za</msg>
+<status status="PASS" endtime="20201203 22:04:51.017" starttime="20201203 22:04:51.017"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${testdata}[1][1]</arg>
+</arguments>
+<msg timestamp="20201203 22:04:51.017" level="INFO">2 db</msg>
+<status status="PASS" endtime="20201203 22:04:51.018" starttime="20201203 22:04:51.017"></status>
+</kw>
+<kw name="Run Keyword" library="BuiltIn">
+<doc>Executes the given keyword with the given arguments.</doc>
+<arguments>
+<arg>DEMO test</arg>
+<arg>${testdata}[0][1]</arg>
+<arg>${testdata}[1][1]</arg>
+</arguments>
+<kw name="DEMO test">
+<arguments>
+<arg>${testdata}[0][1]</arg>
+<arg>${testdata}[1][1]</arg>
+</arguments>
+<kw name="KERES">
+<arguments>
+<arg>${pattern}</arg>
+</arguments>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id:pattern</arg>
+<arg>${pattern}</arg>
+</arguments>
+<msg timestamp="20201203 22:04:51.021" level="INFO">Typing text 'za' into text field 'id:pattern'.</msg>
+<status status="PASS" endtime="20201203 22:04:51.109" starttime="20201203 22:04:51.019"></status>
+</kw>
+<status status="PASS" endtime="20201203 22:04:51.109" starttime="20201203 22:04:51.019"></status>
+</kw>
+<kw name="Page Should Contain" library="Selenium2Library">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>${db}</arg>
+</arguments>
+<msg timestamp="20201203 22:04:51.128" level="INFO">Current page contains text '2 db'.</msg>
+<status status="PASS" endtime="20201203 22:04:51.128" starttime="20201203 22:04:51.110"></status>
+</kw>
+<status status="PASS" endtime="20201203 22:04:51.128" starttime="20201203 22:04:51.018"></status>
+</kw>
+<status status="PASS" endtime="20201203 22:04:51.128" starttime="20201203 22:04:51.018"></status>
+</kw>
+<status status="PASS" endtime="20201203 22:04:51.128" starttime="20201203 22:04:51.015"></status>
+</kw>
+<kw type="foritem" name="${row} = 2">
+<kw name="Get Row Values" library="ExcelLibrary">
+<doc>Returns the specific row values of the sheet name specified.</doc>
+<arguments>
+<arg>data</arg>
+<arg>${row}</arg>
+<arg>True</arg>
+</arguments>
+<assign>
+<var>${testdata}</var>
+</assign>
+<msg timestamp="20201203 22:04:51.129" level="INFO">${testdata} = [('A3', u'b'), ('B3', u'3 db')]</msg>
+<status status="PASS" endtime="20201203 22:04:51.129" starttime="20201203 22:04:51.129"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${testdata}</arg>
+</arguments>
+<msg timestamp="20201203 22:04:51.130" level="INFO">[('A3', u'b'), ('B3', u'3 db')]</msg>
+<status status="PASS" endtime="20201203 22:04:51.130" starttime="20201203 22:04:51.130"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${testdata}[0][1]</arg>
+</arguments>
+<msg timestamp="20201203 22:04:51.130" level="INFO">b</msg>
+<status status="PASS" endtime="20201203 22:04:51.131" starttime="20201203 22:04:51.130"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${testdata}[1][1]</arg>
+</arguments>
+<msg timestamp="20201203 22:04:51.131" level="INFO">3 db</msg>
+<status status="PASS" endtime="20201203 22:04:51.131" starttime="20201203 22:04:51.131"></status>
+</kw>
+<kw name="Run Keyword" library="BuiltIn">
+<doc>Executes the given keyword with the given arguments.</doc>
+<arguments>
+<arg>DEMO test</arg>
+<arg>${testdata}[0][1]</arg>
+<arg>${testdata}[1][1]</arg>
+</arguments>
+<kw name="DEMO test">
+<arguments>
+<arg>${testdata}[0][1]</arg>
+<arg>${testdata}[1][1]</arg>
+</arguments>
+<kw name="KERES">
+<arguments>
+<arg>${pattern}</arg>
+</arguments>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id:pattern</arg>
+<arg>${pattern}</arg>
+</arguments>
+<msg timestamp="20201203 22:04:51.133" level="INFO">Typing text 'b' into text field 'id:pattern'.</msg>
+<status status="PASS" endtime="20201203 22:04:51.195" starttime="20201203 22:04:51.132"></status>
+</kw>
+<status status="PASS" endtime="20201203 22:04:51.195" starttime="20201203 22:04:51.132"></status>
+</kw>
+<kw name="Page Should Contain" library="Selenium2Library">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>${db}</arg>
+</arguments>
+<msg timestamp="20201203 22:04:51.211" level="INFO">Current page contains text '3 db'.</msg>
+<status status="PASS" endtime="20201203 22:04:51.211" starttime="20201203 22:04:51.195"></status>
+</kw>
+<status status="PASS" endtime="20201203 22:04:51.212" starttime="20201203 22:04:51.131"></status>
+</kw>
+<status status="PASS" endtime="20201203 22:04:51.212" starttime="20201203 22:04:51.131"></status>
+</kw>
+<status status="PASS" endtime="20201203 22:04:51.212" starttime="20201203 22:04:51.129"></status>
+</kw>
+<kw type="foritem" name="${row} = 3">
+<kw name="Get Row Values" library="ExcelLibrary">
+<doc>Returns the specific row values of the sheet name specified.</doc>
+<arguments>
+<arg>data</arg>
+<arg>${row}</arg>
+<arg>True</arg>
+</arguments>
+<assign>
+<var>${testdata}</var>
+</assign>
+<msg timestamp="20201203 22:04:51.212" level="INFO">${testdata} = [('A4', u'utca'), ('B4', u'3 db')]</msg>
+<status status="PASS" endtime="20201203 22:04:51.212" starttime="20201203 22:04:51.212"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${testdata}</arg>
+</arguments>
+<msg timestamp="20201203 22:04:51.213" level="INFO">[('A4', u'utca'), ('B4', u'3 db')]</msg>
+<status status="PASS" endtime="20201203 22:04:51.213" starttime="20201203 22:04:51.213"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${testdata}[0][1]</arg>
+</arguments>
+<msg timestamp="20201203 22:04:51.213" level="INFO">utca</msg>
+<status status="PASS" endtime="20201203 22:04:51.213" starttime="20201203 22:04:51.213"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${testdata}[1][1]</arg>
+</arguments>
+<msg timestamp="20201203 22:04:51.214" level="INFO">3 db</msg>
+<status status="PASS" endtime="20201203 22:04:51.214" starttime="20201203 22:04:51.213"></status>
+</kw>
+<kw name="Run Keyword" library="BuiltIn">
+<doc>Executes the given keyword with the given arguments.</doc>
+<arguments>
+<arg>DEMO test</arg>
+<arg>${testdata}[0][1]</arg>
+<arg>${testdata}[1][1]</arg>
+</arguments>
+<kw name="DEMO test">
+<arguments>
+<arg>${testdata}[0][1]</arg>
+<arg>${testdata}[1][1]</arg>
+</arguments>
+<kw name="KERES">
+<arguments>
+<arg>${pattern}</arg>
+</arguments>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>id:pattern</arg>
+<arg>${pattern}</arg>
+</arguments>
+<msg timestamp="20201203 22:04:51.215" level="INFO">Typing text 'utca' into text field 'id:pattern'.</msg>
+<status status="PASS" endtime="20201203 22:04:51.281" starttime="20201203 22:04:51.215"></status>
+</kw>
+<status status="PASS" endtime="20201203 22:04:51.281" starttime="20201203 22:04:51.215"></status>
+</kw>
+<kw name="Page Should Contain" library="Selenium2Library">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>${db}</arg>
+</arguments>
+<msg timestamp="20201203 22:04:51.295" level="INFO">Current page contains text '3 db'.</msg>
+<status status="PASS" endtime="20201203 22:04:51.295" starttime="20201203 22:04:51.281"></status>
+</kw>
+<status status="PASS" endtime="20201203 22:04:51.295" starttime="20201203 22:04:51.214"></status>
+</kw>
+<status status="PASS" endtime="20201203 22:04:51.295" starttime="20201203 22:04:51.214"></status>
+</kw>
+<status status="PASS" endtime="20201203 22:04:51.295" starttime="20201203 22:04:51.212"></status>
+</kw>
+<status status="PASS" endtime="20201203 22:04:51.295" starttime="20201203 22:04:51.015"></status>
+</kw>
+<tags>
+<tag>WebDemo</tag>
+</tags>
+<status status="PASS" endtime="20201203 22:04:51.295" critical="yes" starttime="20201203 22:04:48.528"></status>
+</test>
+<status status="PASS" endtime="20201203 22:04:51.297" starttime="20201203 22:04:48.380"></status>
+</suite>
+<status status="PASS" endtime="20201203 22:04:51.301" starttime="20201203 22:04:48.362"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="0" pass="1">Critical Tests</stat>
+<stat fail="0" pass="1">All Tests</stat>
+</total>
+<tag>
+<stat fail="0" pass="1">WebDemo</stat>
+</tag>
+<suite>
+<stat fail="0" id="s1" name="Suites" pass="1">Suites</stat>
+<stat fail="0" id="s1-s1" name="Webdemo" pass="1">Suites.Webdemo</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
